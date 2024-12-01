@@ -1,0 +1,3466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lead Search with Descriptions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Reset and body styling */
+        body { font-family: Arial, sans-serif; margin: 20px; }
+
+        /* Navbar container */
+        .navbar {
+            background-color: #DFFFD8;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Logo section */
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; /* Space between logo and other elements on small screens */
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Buttons section */
+        .navbar-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Space between buttons */
+            margin-bottom: 10px; /* Space between buttons and other elements on small screens */
+        }
+
+        .navbar-buttons a {
+            font-size: 16px;
+            text-decoration: none;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 4px;
+            background-color: #E8FFE0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .navbar-buttons a:hover {
+            background-color: #CFFFC8;
+        }
+
+        /* Search container */
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between text and input */
+        }
+
+        .search-container h1 {
+            font-size: 18px;
+            color: #333;
+            margin: 0;
+        }
+
+        .search-bar {
+            padding: 10px 15px;
+            border: 2px solid #333;
+            border-radius: 20px;
+            font-size: 16px;
+            width: 250px;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            display: none; /* Hide tables by default */
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f9f9f9;
+        }
+
+        /* No results message */
+        #noResults {
+            display: none;
+            text-align: center;
+            font-size: 18px;
+            color: red;
+            margin-top: 20px;
+        }
+
+        /* Highlight selected row */
+        .selected-row {
+            background-color: #c9f7ff !important;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .logo, .navbar-buttons, .search-container {
+                margin-top: 10px;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <!-- Logo section -->
+        <div class="logo">
+            <img src="https://storage.googleapis.com/msgsndr/75cfkIi6AE4cFT28AK8P/media/672d6c831f6e039f03f162cf.png" alt="Avocadata Logo">
+            <span class="logo-text">AVOCADATA</span>
+        </div>
+
+        <!-- Buttons section -->
+        <div class="navbar-buttons">
+            <a href="#expert">Talk to a Data Sourcing Expert</a>
+            <a href="#request">Post Your Data Request</a>
+        </div>
+
+        <!-- Search bar -->
+        <div class="search-container">
+            <h1>Lead Search</h1>
+            <input type="text" id="leadType" class="search-bar" placeholder="e.g., Solar, Insurance" onkeyup="searchLeads()">
+        </div>
+    </div>
+
+    <!-- Lead Table -->
+    <table id="leadTable">
+        <tr>
+            <th>Lead Type</th>
+            <th>NAICS Code</th>
+            <th>Description</th>
+            <th>Checkout</th>
+        </tr>
+
+        <!-- 100 Lead Categories with Descriptions -->
+        <!-- Below are the first 25 entries. Please replicate the structure for the remaining 75 leads. -->
+
+        <!-- 1. Solar Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Solar Leads</a></td>
+            <td>221114</td>
+            <td>
+                High-quality leads interested in solar energy solutions.
+                <br><strong>Keywords:</strong> solar energy, renewable energy, green technology.
+                <br><strong>Best for:</strong> Solar panel installers, energy consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 2. Insurance Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Insurance Leads</a></td>
+            <td>524210</td>
+            <td>
+                Potential clients seeking various insurance policies.
+                <br><strong>Keywords:</strong> life insurance, auto insurance, health insurance.
+                <br><strong>Best for:</strong> Insurance agents, brokers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 3. Real Estate Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Leads</a></td>
+            <td>531210</td>
+            <td>
+                Individuals interested in buying or selling properties.
+                <br><strong>Keywords:</strong> homes for sale, property listings, realtors.
+                <br><strong>Best for:</strong> Real estate agents, brokers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 4. Crop Production Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Crop Production Leads</a></td>
+            <td>111000</td>
+            <td>
+                Farmers and agricultural businesses focused on crop production.
+                <br><strong>Keywords:</strong> agriculture, farming, crop yield.
+                <br><strong>Best for:</strong> Agribusiness firms, farm equipment suppliers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 5. Oilseed and Grain Farming Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Oilseed and Grain Farming Leads</a></td>
+            <td>111120</td>
+            <td>
+                Farmers specializing in oilseed and grain cultivation.
+                <br><strong>Keywords:</strong> oilseed farming, grain production, sustainable agriculture.
+                <br><strong>Best for:</strong> Seed suppliers, agricultural consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 6. Food Manufacturing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Food Manufacturing Leads</a></td>
+            <td>311000</td>
+            <td>
+                Businesses involved in the production and processing of food products.
+                <br><strong>Keywords:</strong> food production, processing, packaged foods.
+                <br><strong>Best for:</strong> Food manufacturers, packaging suppliers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 7. Beverage Manufacturing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Beverage Manufacturing Leads</a></td>
+            <td>312120</td>
+            <td>
+                Companies producing non-alcoholic and alcoholic beverages.
+                <br><strong>Keywords:</strong> beverage production, soft drinks, alcoholic beverages.
+                <br><strong>Best for:</strong> Beverage producers, bottling companies.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 8. Legal Services Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Legal Services Leads</a></td>
+            <td>541110</td>
+            <td>
+                Clients in need of legal assistance and representation.
+                <br><strong>Keywords:</strong> legal advice, attorneys, law firms.
+                <br><strong>Best for:</strong> Lawyers, legal consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 9. Accounting Services Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Accounting Services Leads</a></td>
+            <td>541211</td>
+            <td>
+                Businesses seeking accounting and financial services.
+                <br><strong>Keywords:</strong> bookkeeping, tax preparation, financial statements.
+                <br><strong>Best for:</strong> Accountants, CPA firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 10. Ambulatory Health Care Services Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Ambulatory Health Care Services Leads</a></td>
+            <td>621000</td>
+            <td>
+                Individuals and businesses seeking outpatient health care services.
+                <br><strong>Keywords:</strong> outpatient care, health clinics, medical services.
+                <br><strong>Best for:</strong> Clinics, health care providers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 11. Hospitals Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Hospitals Leads</a></td>
+            <td>622000</td>
+            <td>
+                Medical facilities seeking patients and partnerships.
+                <br><strong>Keywords:</strong> hospitals, medical centers, patient care.
+                <br><strong>Best for:</strong> Hospital administrators, medical equipment suppliers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 12. Cybersecurity Services Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Cybersecurity Services Leads</a></td>
+            <td>541512</td>
+            <td>
+                Businesses in need of cybersecurity solutions and services.
+                <br><strong>Keywords:</strong> cybersecurity, data protection, network security.
+                <br><strong>Best for:</strong> IT security firms, cybersecurity consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 13. AI Development Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">AI Development Leads</a></td>
+            <td>541715</td>
+            <td>
+                Companies seeking artificial intelligence and machine learning solutions.
+                <br><strong>Keywords:</strong> artificial intelligence, machine learning, AI solutions.
+                <br><strong>Best for:</strong> AI developers, tech startups.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 14. Environmental Consulting Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Environmental Consulting Leads</a></td>
+            <td>541620</td>
+            <td>
+                Organizations needing environmental impact assessments and sustainability consulting.
+                <br><strong>Keywords:</strong> environmental consulting, sustainability, impact assessment.
+                <br><strong>Best for:</strong> Environmental firms, sustainability consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 15. Waste Management Services Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Waste Management Services Leads</a></td>
+            <td>562111</td>
+            <td>
+                Businesses seeking waste management and recycling solutions.
+                <br><strong>Keywords:</strong> waste management, recycling services, disposal solutions.
+                <br><strong>Best for:</strong> Waste management companies, recycling firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 16. Wind Energy Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Wind Energy Leads</a></td>
+            <td>221115</td>
+            <td>
+                Leads interested in wind energy projects and investments.
+                <br><strong>Keywords:</strong> wind energy, renewable energy, wind turbines.
+                <br><strong>Best for:</strong> Wind energy companies, renewable energy consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 17. Hydroelectric Power Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Hydroelectric Power Leads</a></td>
+            <td>221111</td>
+            <td>
+                Organizations seeking hydroelectric power solutions and investments.
+                <br><strong>Keywords:</strong> hydroelectric power, renewable energy, water energy.
+                <br><strong>Best for:</strong> Hydroelectric companies, energy consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 18. Import/Export Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Import/Export Leads</a></td>
+            <td>425120</td>
+            <td>
+                Businesses involved in international trade and import/export activities.
+                <br><strong>Keywords:</strong> international trade, import/export, global business.
+                <br><strong>Best for:</strong> Trade companies, logistics firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 19. International Trade Consulting Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">International Trade Consulting Leads</a></td>
+            <td>541614</td>
+            <td>
+                Organizations seeking consulting services for international trade expansion.
+                <br><strong>Keywords:</strong> trade consulting, global expansion, international markets.
+                <br><strong>Best for:</strong> Trade consultants, international business advisors.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 20. Charitable Organizations Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Charitable Organizations Leads</a></td>
+            <td>813211</td>
+            <td>
+                Nonprofits and charities looking for support and partnerships.
+                <br><strong>Keywords:</strong> nonprofit, charity, fundraising.
+                <br><strong>Best for:</strong> Charitable organizations, fundraising consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 21. Social Advocacy Organizations Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Social Advocacy Organizations Leads</a></td>
+            <td>813311</td>
+            <td>
+                Groups advocating for social change and public policy reforms.
+                <br><strong>Keywords:</strong> social advocacy, public policy, community engagement.
+                <br><strong>Best for:</strong> Advocacy groups, policy consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 22. Regulatory Compliance Consulting Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Regulatory Compliance Consulting Leads</a></td>
+            <td>541690</td>
+            <td>
+                Businesses needing assistance with regulatory compliance and standards.
+                <br><strong>Keywords:</strong> regulatory compliance, legal standards, compliance consulting.
+                <br><strong>Best for:</strong> Compliance consultants, legal advisors.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 23. Intellectual Property Law Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Intellectual Property Law Leads</a></td>
+            <td>541110</td>
+            <td>
+                Clients seeking legal services for intellectual property protection.
+                <br><strong>Keywords:</strong> intellectual property, patents, trademarks.
+                <br><strong>Best for:</strong> IP lawyers, legal consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 24. Medical Laboratories Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Medical Laboratories Leads</a></td>
+            <td>621511</td>
+            <td>
+                Medical labs seeking partnerships and business opportunities.
+                <br><strong>Keywords:</strong> medical labs, diagnostic testing, healthcare services.
+                <br><strong>Best for:</strong> Medical laboratory managers, healthcare consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 25. Diagnostic Imaging Centers Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Diagnostic Imaging Centers Leads</a></td>
+            <td>621512</td>
+            <td>
+                Imaging centers looking to expand services and client base.
+                <br><strong>Keywords:</strong> diagnostic imaging, MRI, CT scans.
+                <br><strong>Best for:</strong> Imaging center managers, medical equipment suppliers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 26. Tour Operators Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Tour Operators Leads</a></td>
+            <td>561520</td>
+            <td>
+                Tour operators seeking to attract more travelers and partners.
+                <br><strong>Keywords:</strong> travel tours, vacation packages, travel agencies.
+                <br><strong>Best for:</strong> Travel agencies, tour planners.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 27. Convention and Trade Show Organizers Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Convention and Trade Show Organizers Leads</a></td>
+            <td>561920</td>
+            <td>
+                Event organizers looking to plan conventions and trade shows.
+                <br><strong>Keywords:</strong> trade shows, conventions, event planning.
+                <br><strong>Best for:</strong> Event planners, trade show coordinators.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 28. Computer Training Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Computer Training Leads</a></td>
+            <td>611420</td>
+            <td>
+                Individuals and businesses seeking computer and IT training services.
+                <br><strong>Keywords:</strong> IT training, computer courses, technical education.
+                <br><strong>Best for:</strong> Training centers, educational institutions.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 29. Fine Arts Schools Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Fine Arts Schools Leads</a></td>
+            <td>611610</td>
+            <td>
+                Art schools and institutions looking to attract new students.
+                <br><strong>Keywords:</strong> fine arts, art education, creative courses.
+                <br><strong>Best for:</strong> Art educators, educational marketers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 30. Online Retailers Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Online Retailers Leads</a></td>
+            <td>454110</td>
+            <td>
+                E-commerce businesses looking to expand their online presence.
+                <br><strong>Keywords:</strong> e-commerce, online stores, digital retail.
+                <br><strong>Best for:</strong> Online retailers, e-commerce platforms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 31. Health and Personal Care Stores Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Health and Personal Care Stores Leads</a></td>
+            <td>446120</td>
+            <td>
+                Retailers specializing in health and personal care products.
+                <br><strong>Keywords:</strong> health products, personal care, wellness.
+                <br><strong>Best for:</strong> Health stores, personal care retailers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 32. Dry Cleaning and Laundry Services Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Dry Cleaning and Laundry Services Leads</a></td>
+            <td>812310</td>
+            <td>
+                Businesses offering dry cleaning and laundry services.
+                <br><strong>Keywords:</strong> dry cleaning, laundry services, garment care.
+                <br><strong>Best for:</strong> Laundry service providers, dry cleaners.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 33. Funeral Homes Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Funeral Homes Leads</a></td>
+            <td>812210</td>
+            <td>
+                Funeral homes seeking to connect with families and communities.
+                <br><strong>Keywords:</strong> funeral services, bereavement, memorial planning.
+                <br><strong>Best for:</strong> Funeral directors, memorial service planners.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 34. Executive Offices Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Executive Offices Leads</a></td>
+            <td>921110</td>
+            <td>
+                Government executive offices looking for data and consultancy services.
+                <br><strong>Keywords:</strong> government services, executive data, public administration.
+                <br><strong>Best for:</strong> Government consultants, public administration advisors.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 35. Space Research and Technology Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Space Research and Technology Leads</a></td>
+            <td>927110</td>
+            <td>
+                Organizations involved in space exploration and technology development.
+                <br><strong>Keywords:</strong> aerospace, satellites, space missions.
+                <br><strong>Best for:</strong> Aerospace companies, research institutions.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 36. Manufacturing Consulting Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Manufacturing Consulting Leads</a></td>
+            <td>541614</td>
+            <td>
+                Manufacturers seeking consulting services for operational efficiency.
+                <br><strong>Keywords:</strong> manufacturing consulting, operational efficiency, process improvement.
+                <br><strong>Best for:</strong> Manufacturing firms, process consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 37. Wholesale Trade Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Wholesale Trade Leads</a></td>
+            <td>423000</td>
+            <td>
+                Businesses involved in wholesale trade looking to expand their client base.
+                <br><strong>Keywords:</strong> wholesale, bulk purchasing, distribution.
+                <br><strong>Best for:</strong> Wholesale distributors, bulk suppliers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 38. Construction Services Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Construction Services Leads</a></td>
+            <td>236220</td>
+            <td>
+                Construction companies seeking new projects and clients.
+                <br><strong>Keywords:</strong> construction projects, building services, contractors.
+                <br><strong>Best for:</strong> Construction firms, building contractors.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 39. Hospitality Management Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Hospitality Management Leads</a></td>
+            <td>721110</td>
+            <td>
+                Hotels and hospitality businesses seeking management and operational leads.
+                <br><strong>Keywords:</strong> hotel management, hospitality services, guest services.
+                <br><strong>Best for:</strong> Hotel managers, hospitality consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 40. Educational Consulting Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Educational Consulting Leads</a></td>
+            <td>541720</td>
+            <td>
+                Educational institutions seeking consulting for curriculum development and administration.
+                <br><strong>Keywords:</strong> educational consulting, curriculum development, academic administration.
+                <br><strong>Best for:</strong> Educational consultants, academic advisors.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 41. Retail Consulting Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Retail Consulting Leads</a></td>
+            <td>541618</td>
+            <td>
+                Retail businesses seeking strategies for sales optimization and store management.
+                <br><strong>Keywords:</strong> retail consulting, sales optimization, store management.
+                <br><strong>Best for:</strong> Retail consultants, store managers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 42. Biotechnology Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Biotechnology Leads</a></td>
+            <td>541714</td>
+            <td>
+                Companies in the biotechnology sector seeking partnerships and investments.
+                <br><strong>Keywords:</strong> biotechnology, biotech research, genetic engineering.
+                <br><strong>Best for:</strong> Biotech firms, research institutions.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 43. Renewable Energy Consulting Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Renewable Energy Consulting Leads</a></td>
+            <td>541690</td>
+            <td>
+                Organizations seeking consulting services for renewable energy projects.
+                <br><strong>Keywords:</strong> renewable energy, sustainable consulting, green projects.
+                <br><strong>Best for:</strong> Renewable energy consultants, sustainability firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 44. Financial Advisory Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Financial Advisory Leads</a></td>
+            <td>523930</td>
+            <td>
+                Businesses and individuals seeking financial planning and advisory services.
+                <br><strong>Keywords:</strong> financial planning, investment advice, wealth management.
+                <br><strong>Best for:</strong> Financial advisors, investment consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 45. Healthcare IT Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Healthcare IT Leads</a></td>
+            <td>541512</td>
+            <td>
+                Healthcare providers seeking IT solutions for patient management and data security.
+                <br><strong>Keywords:</strong> healthcare IT, patient management, data security.
+                <br><strong>Best for:</strong> IT firms, healthcare consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 46. Digital Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Digital Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Businesses looking to enhance their digital marketing strategies and online presence.
+                <br><strong>Keywords:</strong> digital marketing, SEO, online advertising.
+                <br><strong>Best for:</strong> Marketing agencies, digital consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 47. Mobile App Development Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Mobile App Development Leads</a></td>
+            <td>541511</td>
+            <td>
+                Companies seeking mobile app development services for their business needs.
+                <br><strong>Keywords:</strong> mobile app development, iOS, Android.
+                <br><strong>Best for:</strong> App developers, software firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 48. E-commerce Solutions Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">E-commerce Solutions Leads</a></td>
+            <td>541511</td>
+            <td>
+                Retail businesses seeking comprehensive e-commerce solutions.
+                <br><strong>Keywords:</strong> e-commerce solutions, online storefronts, digital sales.
+                <br><strong>Best for:</strong> E-commerce platforms, web developers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 49. Cloud Computing Services Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Cloud Computing Services Leads</a></td>
+            <td>541511</td>
+            <td>
+                Businesses seeking cloud computing and storage solutions.
+                <br><strong>Keywords:</strong> cloud computing, SaaS, cloud storage.
+                <br><strong>Best for:</strong> Cloud service providers, IT consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 50. Data Analytics Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Data Analytics Leads</a></td>
+            <td>541511</td>
+            <td>
+                Organizations seeking data analysis and business intelligence services.
+                <br><strong>Keywords:</strong> data analytics, business intelligence, data visualization.
+                <br><strong>Best for:</strong> Data analysts, BI consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 51. Renewable Energy Equipment Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Renewable Energy Equipment Leads</a></td>
+            <td>333618</td>
+            <td>
+                Suppliers and manufacturers of renewable energy equipment.
+                <br><strong>Keywords:</strong> renewable energy equipment, solar panels, wind turbines.
+                <br><strong>Best for:</strong> Equipment suppliers, manufacturers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 52. Healthcare Providers Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Healthcare Providers Leads</a></td>
+            <td>621999</td>
+            <td>
+                Medical providers seeking to expand their patient base and services.
+                <br><strong>Keywords:</strong> healthcare providers, medical services, patient care.
+                <br><strong>Best for:</strong> Clinics, hospitals, medical practices.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 53. Financial Technology Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Financial Technology Leads</a></td>
+            <td>541511</td>
+            <td>
+                Fintech companies seeking partnerships and business opportunities.
+                <br><strong>Keywords:</strong> fintech, financial services, digital banking.
+                <br><strong>Best for:</strong> Fintech startups, financial consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 54. Logistics and Supply Chain Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Logistics and Supply Chain Leads</a></td>
+            <td>541614</td>
+            <td>
+                Companies looking to optimize their logistics and supply chain operations.
+                <br><strong>Keywords:</strong> logistics, supply chain management, distribution.
+                <br><strong>Best for:</strong> Logistics firms, supply chain consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 55. Hospitality Technology Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Hospitality Technology Leads</a></td>
+            <td>541512</td>
+            <td>
+                Technology solutions for the hospitality industry to enhance guest experiences.
+                <br><strong>Keywords:</strong> hospitality technology, hotel software, guest management.
+                <br><strong>Best for:</strong> Hotel software providers, hospitality consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 56. Educational Institutions Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Educational Institutions Leads</a></td>
+            <td>611310</td>
+            <td>
+                Schools and universities seeking to expand their programs and enrollments.
+                <br><strong>Keywords:</strong> educational institutions, universities, academic programs.
+                <br><strong>Best for:</strong> Educational marketers, enrollment consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 57. Transportation Services Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Transportation Services Leads</a></td>
+            <td>485999</td>
+            <td>
+                Transportation companies seeking new routes and clients.
+                <br><strong>Keywords:</strong> transportation services, logistics, freight.
+                <br><strong>Best for:</strong> Transport companies, logistics providers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 58. Nonprofit Fundraising Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Nonprofit Fundraising Leads</a></td>
+            <td>813319</td>
+            <td>
+                Nonprofits seeking to enhance their fundraising strategies and donor base.
+                <br><strong>Keywords:</strong> nonprofit fundraising, donor engagement, charitable giving.
+                <br><strong>Best for:</strong> Nonprofit organizations, fundraising consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 59. Software Development Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Software Development Leads</a></td>
+            <td>541511</td>
+            <td>
+                Companies seeking custom software solutions and development services.
+                <br><strong>Keywords:</strong> software development, custom software, application development.
+                <br><strong>Best for:</strong> Software firms, app developers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 60. Renewable Energy Investment Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Renewable Energy Investment Leads</a></td>
+            <td>523930</td>
+            <td>
+                Investors looking to invest in renewable energy projects and companies.
+                <br><strong>Keywords:</strong> renewable energy investment, green investments, sustainable projects.
+                <br><strong>Best for:</strong> Investors, investment firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 61. Healthcare Equipment Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Healthcare Equipment Leads</a></td>
+            <td>339112</td>
+            <td>
+                Suppliers and manufacturers of medical and healthcare equipment.
+                <br><strong>Keywords:</strong> medical equipment, healthcare devices, medical supplies.
+                <br><strong>Best for:</strong> Medical equipment suppliers, healthcare providers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 62. Marketing Research Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Marketing Research Leads</a></td>
+            <td>541910</td>
+            <td>
+                Organizations seeking marketing research and public opinion polling services.
+                <br><strong>Keywords:</strong> market research, public opinion polling, consumer insights.
+                <br><strong>Best for:</strong> Market research firms, polling agencies.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 63. Targeted Consumer Segments Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Targeted Consumer Segments Leads</a></td>
+            <td>541910</td>
+            <td>
+                Individuals segmented by demographics, psychographics, and behavior for targeted marketing.
+                <br><strong>Keywords:</strong> consumer segmentation, targeted marketing, demographic data.
+                <br><strong>Best for:</strong> Marketers, advertising agencies.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 64. Comprehensive Marketing Databases Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Comprehensive Marketing Databases Leads</a></td>
+            <td>541910</td>
+            <td>
+                Extensive databases encompassing various consumer data types for integrated marketing campaigns.
+                <br><strong>Keywords:</strong> marketing databases, consumer data, integrated campaigns.
+                <br><strong>Best for:</strong> Marketing firms, data analysts.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 65. Consumer Behavior Data Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Consumer Behavior Data Leads</a></td>
+            <td>541910</td>
+            <td>
+                Data on consumer behaviors, including online activity and purchasing patterns.
+                <br><strong>Keywords:</strong> consumer behavior, purchasing patterns, online activity.
+                <br><strong>Best for:</strong> Marketers, data scientists.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 66. Affinity Marketing Lists Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Affinity Marketing Lists Leads</a></td>
+            <td>541613</td>
+            <td>
+                Lists based on consumer interests, hobbies, and affiliations for affinity-based campaigns.
+                <br><strong>Keywords:</strong> affinity marketing, consumer interests, hobby lists.
+                <br><strong>Best for:</strong> Affinity marketers, targeted advertising.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 67. Event Attendee Lists Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Event Attendee Lists Leads</a></td>
+            <td>711310</td>
+            <td>
+                Lists of individuals who have attended specific events for follow-up marketing.
+                <br><strong>Keywords:</strong> event attendees, event marketing, attendee lists.
+                <br><strong>Best for:</strong> Event organizers, marketing agencies.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 68. Lifestyle Segmentation Data Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Lifestyle Segmentation Data Leads</a></td>
+            <td>541910</td>
+            <td>
+                Segmented data based on consumer lifestyles, including hobbies and daily activities.
+                <br><strong>Keywords:</strong> lifestyle segmentation, consumer hobbies, daily activities.
+                <br><strong>Best for:</strong> Lifestyle marketers, consumer analysts.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 69. Demographic Profiling Data Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Demographic Profiling Data Leads</a></td>
+            <td>541910</td>
+            <td>
+                Comprehensive demographic profiles including age, gender, income, and education.
+                <br><strong>Keywords:</strong> demographic profiling, age groups, income levels.
+                <br><strong>Best for:</strong> Demographic analysts, targeted advertising.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 70. Interest-Based Marketing Lists Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Interest-Based Marketing Lists Leads</a></td>
+            <td>541613</td>
+            <td>
+                Lists based on specific consumer interests and online behaviors for targeted campaigns.
+                <br><strong>Keywords:</strong> interest-based marketing, online behaviors, consumer interests.
+                <br><strong>Best for:</strong> Digital marketers, online advertisers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 71. High-Value Consumer Lists Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">High-Value Consumer Lists Leads</a></td>
+            <td>541613</td>
+            <td>
+                Lists of high-value consumers based on premium purchasing behavior and brand loyalty.
+                <br><strong>Keywords:</strong> high-value consumers, premium purchasing, brand loyalty.
+                <br><strong>Best for:</strong> Luxury brands, high-end marketers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 72. Custom Audience Lists Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Custom Audience Lists Leads</a></td>
+            <td>541613</td>
+            <td>
+                Tailored audience lists based on specific criteria and campaign goals.
+                <br><strong>Keywords:</strong> custom audience, tailored lists, specific criteria.
+                <br><strong>Best for:</strong> Custom marketers, niche advertisers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 73. Lookalike Audience Lists Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Lookalike Audience Lists Leads</a></td>
+            <td>541613</td>
+            <td>
+                Lists of consumers similar to your existing high-value customers for expanded reach.
+                <br><strong>Keywords:</strong> lookalike audiences, similar consumers, expanded reach.
+                <br><strong>Best for:</strong> Growth marketers, audience expansion.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 74. Retargeting Lists Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Retargeting Lists Leads</a></td>
+            <td>541613</td>
+            <td>
+                Lists of individuals who have previously interacted with your brand or website.
+                <br><strong>Keywords:</strong> retargeting, re-engagement, previous visitors.
+                <br><strong>Best for:</strong> Retargeting marketers, digital advertisers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 75. Mobile Marketing Lists Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Mobile Marketing Lists Leads</a></td>
+            <td>541613</td>
+            <td>
+                Lists targeting consumers with verified mobile numbers for mobile campaigns.
+                <br><strong>Keywords:</strong> mobile marketing, SMS campaigns, mobile engagement.
+                <br><strong>Best for:</strong> Mobile marketers, SMS campaign managers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 76. Content Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Content Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Businesses seeking to enhance their content marketing strategies.
+                <br><strong>Keywords:</strong> content marketing, content strategy, digital content.
+                <br><strong>Best for:</strong> Content creators, digital marketers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 77. Social Media Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Social Media Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Companies looking to boost their social media presence and engagement.
+                <br><strong>Keywords:</strong> social media marketing, social engagement, digital campaigns.
+                <br><strong>Best for:</strong> Social media managers, digital marketers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 78. Email Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Email Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Businesses seeking to optimize their email marketing campaigns.
+                <br><strong>Keywords:</strong> email marketing, newsletters, email campaigns.
+                <br><strong>Best for:</strong> Email marketers, digital consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 79. Search Engine Optimization Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Search Engine Optimization Leads</a></td>
+            <td>541611</td>
+            <td>
+                Companies looking to improve their website's search engine rankings.
+                <br><strong>Keywords:</strong> SEO, search engine rankings, website optimization.
+                <br><strong>Best for:</strong> SEO specialists, digital marketers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 80. Pay-Per-Click Advertising Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Pay-Per-Click Advertising Leads</a></td>
+            <td>541613</td>
+            <td>
+                Businesses seeking to manage and optimize their PPC advertising campaigns.
+                <br><strong>Keywords:</strong> PPC advertising, paid search, Google Ads.
+                <br><strong>Best for:</strong> PPC specialists, digital advertisers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 81. Video Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Video Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Organizations looking to leverage video content for marketing purposes.
+                <br><strong>Keywords:</strong> video marketing, video content, digital video.
+                <br><strong>Best for:</strong> Video producers, digital marketers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 82. Influencer Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Influencer Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Brands seeking to collaborate with influencers for marketing campaigns.
+                <br><strong>Keywords:</strong> influencer marketing, brand ambassadors, social influencers.
+                <br><strong>Best for:</strong> Brands, marketing agencies.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 83. Affiliate Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Affiliate Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Companies looking to establish or expand their affiliate marketing programs.
+                <br><strong>Keywords:</strong> affiliate marketing, affiliate programs, partner marketing.
+                <br><strong>Best for:</strong> Affiliate managers, digital marketers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 84. Market Expansion Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Market Expansion Leads</a></td>
+            <td>541614</td>
+            <td>
+                Businesses planning to enter new markets and seeking strategic leads.
+                <br><strong>Keywords:</strong> market expansion, business growth, new markets.
+                <br><strong>Best for:</strong> Business development managers, strategic consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 85. Franchise Development Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Franchise Development Leads</a></td>
+            <td>541614</td>
+            <td>
+                Individuals and businesses interested in franchising opportunities.
+                <br><strong>Keywords:</strong> franchising, franchise opportunities, business expansion.
+                <br><strong>Best for:</strong> Franchise developers, business consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 86. Venture Capital Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Venture Capital Leads</a></td>
+            <td>523930</td>
+            <td>
+                Startups and businesses seeking venture capital funding and investments.
+                <br><strong>Keywords:</strong> venture capital, startup funding, business investments.
+                <br><strong>Best for:</strong> Startups, entrepreneurs.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 87. Business Process Outsourcing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Business Process Outsourcing Leads</a></td>
+            <td>561499</td>
+            <td>
+                Companies looking to outsource business processes for efficiency.
+                <br><strong>Keywords:</strong> BPO, business outsourcing, process optimization.
+                <br><strong>Best for:</strong> BPO providers, business consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 88. Supply Chain Management Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Supply Chain Management Leads</a></td>
+            <td>541614</td>
+            <td>
+                Businesses seeking to optimize their supply chain operations and logistics.
+                <br><strong>Keywords:</strong> supply chain management, logistics, inventory control.
+                <br><strong>Best for:</strong> Supply chain consultants, logistics firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 89. Event Management Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Event Management Leads</a></td>
+            <td>541611</td>
+            <td>
+                Companies seeking to organize and manage corporate and private events.
+                <br><strong>Keywords:</strong> event management, event planning, corporate events.
+                <br><strong>Best for:</strong> Event planners, management firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 90. Nonprofit Grant Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Nonprofit Grant Leads</a></td>
+            <td>813219</td>
+            <td>
+                Nonprofits seeking grant opportunities and funding.
+                <br><strong>Keywords:</strong> nonprofit grants, funding opportunities, grant writing.
+                <br><strong>Best for:</strong> Nonprofit organizations, grant writers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 91. Public Relations Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Public Relations Leads</a></td>
+            <td>541820</td>
+            <td>
+                Companies looking to improve their public image and media relations.
+                <br><strong>Keywords:</strong> public relations, media outreach, brand image.
+                <br><strong>Best for:</strong> PR firms, media consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 92. Human Resources Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Human Resources Leads</a></td>
+            <td>541612</td>
+            <td>
+                Businesses seeking HR solutions for recruitment and employee management.
+                <br><strong>Keywords:</strong> human resources, recruitment, employee management.
+                <br><strong>Best for:</strong> HR consultants, recruitment agencies.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 93. Franchise Development Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Franchise Development Leads</a></td>
+            <td>541614</td>
+            <td>
+                Businesses looking to expand through franchising opportunities.
+                <br><strong>Keywords:</strong> franchising, franchise opportunities, business expansion.
+                <br><strong>Best for:</strong> Franchise developers, business consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 94. Cloud Services Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Cloud Services Leads</a></td>
+            <td>541512</td>
+            <td>
+                Companies seeking cloud computing and storage solutions.
+                <br><strong>Keywords:</strong> cloud services, SaaS, cloud storage.
+                <br><strong>Best for:</strong> Cloud service providers, IT consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+        
+          <!-- 1. Residential Real Estate Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Residential Real Estate Leads</a></td>
+            <td>531110</td>
+            <td>
+                Individuals and families seeking to buy or sell residential properties.
+                <br><strong>Keywords:</strong> homes for sale, residential properties, realtors.
+                <br><strong>Best for:</strong> Real estate agents, residential brokers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 2. Commercial Real Estate Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Commercial Real Estate Leads</a></td>
+            <td>531120</td>
+            <td>
+                Businesses looking to buy, sell, or lease commercial properties.
+                <br><strong>Keywords:</strong> commercial properties, office spaces, retail real estate.
+                <br><strong>Best for:</strong> Commercial realtors, property managers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 3. Luxury Real Estate Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Luxury Real Estate Leads</a></td>
+            <td>531110</td>
+            <td>
+                High-net-worth individuals seeking premium and luxury properties.
+                <br><strong>Keywords:</strong> luxury homes, high-end real estate, exclusive properties.
+                <br><strong>Best for:</strong> Luxury realtors, high-end brokers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 4. Investment Property Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Investment Property Leads</a></td>
+            <td>531130</td>
+            <td>
+                Investors looking to purchase properties for rental income or resale.
+                <br><strong>Keywords:</strong> investment properties, rental income, property investment.
+                <br><strong>Best for:</strong> Real estate investors, investment brokers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 5. Rental Property Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Rental Property Leads</a></td>
+            <td>531110</td>
+            <td>
+                Individuals and families seeking rental housing options.
+                <br><strong>Keywords:</strong> rental homes, apartments for rent, leasing properties.
+                <br><strong>Best for:</strong> Property managers, rental brokers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 6. Foreclosure Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Foreclosure Leads</a></td>
+            <td>531110</td>
+            <td>
+                Properties in foreclosure available for purchase at discounted prices.
+                <br><strong>Keywords:</strong> foreclosed homes, discounted properties, foreclosure sales.
+                <br><strong>Best for:</strong> Real estate investors, foreclosure specialists.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 7. New Construction Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">New Construction Leads</a></td>
+            <td>236220</td>
+            <td>
+                Buyers interested in newly built homes and properties.
+                <br><strong>Keywords:</strong> new homes, newly built properties, construction real estate.
+                <br><strong>Best for:</strong> New home builders, construction companies.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 8. Property Management Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Property Management Leads</a></td>
+            <td>531311</td>
+            <td>
+                Property owners seeking management services for their residential or commercial properties.
+                <br><strong>Keywords:</strong> property management, rental management, real estate services.
+                <br><strong>Best for:</strong> Property managers, management firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 9. Real Estate Appraisal Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Appraisal Leads</a></td>
+            <td>531220</td>
+            <td>
+                Individuals and businesses needing property valuation services.
+                <br><strong>Keywords:</strong> property appraisal, real estate valuation, appraisal services.
+                <br><strong>Best for:</strong> Appraisers, valuation firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 10. Real Estate Development Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Development Leads</a></td>
+            <td>531320</td>
+            <td>
+                Developers seeking opportunities for real estate projects and land acquisition.
+                <br><strong>Keywords:</strong> real estate development, property development, land acquisition.
+                <br><strong>Best for:</strong> Real estate developers, development firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 11. Vacation Rental Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Vacation Rental Leads</a></td>
+            <td>531110</td>
+            <td>
+                Property owners and managers seeking to rent out properties for vacation stays.
+                <br><strong>Keywords:</strong> vacation rentals, short-term rentals, holiday homes.
+                <br><strong>Best for:</strong> Vacation rental managers, property owners.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 12. Industrial Real Estate Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Industrial Real Estate Leads</a></td>
+            <td>531120</td>
+            <td>
+                Businesses looking to buy, sell, or lease industrial properties such as warehouses and factories.
+                <br><strong>Keywords:</strong> industrial properties, warehouses, manufacturing facilities.
+                <br><strong>Best for:</strong> Industrial realtors, property managers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 13. Retail Property Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Retail Property Leads</a></td>
+            <td>531120</td>
+            <td>
+                Retailers seeking commercial spaces for shops, malls, and storefronts.
+                <br><strong>Keywords:</strong> retail properties, storefronts, shopping centers.
+                <br><strong>Best for:</strong> Retail realtors, commercial brokers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 14. Real Estate Investment Trust (REIT) Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Investment Trust (REIT) Leads</a></td>
+            <td>531210</td>
+            <td>
+                REITs seeking investment opportunities and portfolio expansion.
+                <br><strong>Keywords:</strong> REIT investments, real estate portfolios, property investments.
+                <br><strong>Best for:</strong> REIT managers, investment firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 15. Multi-family Housing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Multi-family Housing Leads</a></td>
+            <td>531110</td>
+            <td>
+                Investors and property managers interested in multi-family residential units.
+                <br><strong>Keywords:</strong> multi-family housing, apartment buildings, duplexes.
+                <br><strong>Best for:</strong> Property managers, real estate investors.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 16. Single-family Home Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Single-family Home Leads</a></td>
+            <td>531110</td>
+            <td>
+                Individuals and families looking to buy or sell single-family homes.
+                <br><strong>Keywords:</strong> single-family homes, detached houses, family residences.
+                <br><strong>Best for:</strong> Residential realtors, home sellers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 17. Real Estate Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Real estate professionals seeking marketing services to promote their listings and services.
+                <br><strong>Keywords:</strong> real estate marketing, property promotion, listing advertisements.
+                <br><strong>Best for:</strong> Marketing agencies, digital marketers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 18. Real Estate Technology Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Technology Leads</a></td>
+            <td>541512</td>
+            <td>
+                Companies offering technological solutions for the real estate industry.
+                <br><strong>Keywords:</strong> real estate technology, proptech, real estate software.
+                <br><strong>Best for:</strong> Tech providers, software developers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 19. Real Estate Education Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Education Leads</a></td>
+            <td>611310</td>
+            <td>
+                Educational institutions and trainers offering real estate courses and certifications.
+                <br><strong>Keywords:</strong> real estate education, real estate courses, licensing training.
+                <br><strong>Best for:</strong> Educational institutions, training providers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 20. Senior Housing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Senior Housing Leads</a></td>
+            <td>531110</td>
+            <td>
+                Individuals and families seeking housing options for seniors, including assisted living.
+                <br><strong>Keywords:</strong> senior housing, assisted living, retirement homes.
+                <br><strong>Best for:</strong> Senior housing providers, real estate agents.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 21. Affordable Housing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Affordable Housing Leads</a></td>
+            <td>531110</td>
+            <td>
+                Individuals and families seeking affordable housing solutions and subsidies.
+                <br><strong>Keywords:</strong> affordable housing, subsidized housing, low-income housing.
+                <br><strong>Best for:</strong> Housing agencies, real estate developers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 22. Real Estate Photography Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Photography Leads</a></td>
+            <td>541930</td>
+            <td>
+                Real estate agents and sellers seeking professional photography services for listings.
+                <br><strong>Keywords:</strong> real estate photography, property photos, listing images.
+                <br><strong>Best for:</strong> Photographers, visual media specialists.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 23. Real Estate Financing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Financing Leads</a></td>
+            <td>522310</td>
+            <td>
+                Individuals and businesses seeking financing options for real estate purchases.
+                <br><strong>Keywords:</strong> real estate financing, mortgage loans, property loans.
+                <br><strong>Best for:</strong> Lenders, mortgage brokers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 24. Real Estate Legal Services Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Legal Services Leads</a></td>
+            <td>541110</td>
+            <td>
+                Clients needing legal assistance with real estate transactions and contracts.
+                <br><strong>Keywords:</strong> real estate legal services, property law, real estate contracts.
+                <br><strong>Best for:</strong> Real estate attorneys, legal consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 25. Real Estate Staging Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Staging Leads</a></td>
+            <td>541611</td>
+            <td>
+                Sellers looking to stage their properties to attract potential buyers.
+                <br><strong>Keywords:</strong> real estate staging, property styling, home presentation.
+                <br><strong>Best for:</strong> Staging professionals, interior designers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 26. Green Real Estate Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Green Real Estate Leads</a></td>
+            <td>541614</td>
+            <td>
+                Buyers and sellers interested in eco-friendly and sustainable real estate options.
+                <br><strong>Keywords:</strong> green real estate, sustainable properties, eco-friendly homes.
+                <br><strong>Best for:</strong> Green realtors, sustainable property developers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 27. Commercial Leasing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Commercial Leasing Leads</a></td>
+            <td>531120</td>
+            <td>
+                Businesses seeking to lease commercial spaces for operations.
+                <br><strong>Keywords:</strong> commercial leasing, office leases, retail space leasing.
+                <br><strong>Best for:</strong> Leasing agents, commercial brokers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 28. Real Estate Syndication Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Syndication Leads</a></td>
+            <td>531210</td>
+            <td>
+                Investors and groups looking to pool resources for larger real estate investments.
+                <br><strong>Keywords:</strong> real estate syndication, group investments, pooled funds.
+                <br><strong>Best for:</strong> Real estate investors, investment groups.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 29. Land Development Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Land Development Leads</a></td>
+            <td>531320</td>
+            <td>
+                Developers and investors interested in purchasing and developing land parcels.
+                <br><strong>Keywords:</strong> land development, property development, land acquisition.
+                <br><strong>Best for:</strong> Land developers, real estate investors.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 30. Real Estate Auction Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Auction Leads</a></td>
+            <td>531390</td>
+            <td>
+                Properties being sold through auctions, often at discounted prices.
+                <br><strong>Keywords:</strong> real estate auctions, auction sales, property bidding.
+                <br><strong>Best for:</strong> Auction houses, real estate investors.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 31. Property Inspection Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Property Inspection Leads</a></td>
+            <td>541350</td>
+            <td>
+                Buyers and sellers needing property inspection services before transactions.
+                <br><strong>Keywords:</strong> property inspection, home inspections, real estate inspections.
+                <br><strong>Best for:</strong> Property inspectors, inspection services.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 32. Real Estate Insurance Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Insurance Leads</a></td>
+            <td>524210</td>
+            <td>
+                Individuals and businesses seeking insurance coverage for real estate properties.
+                <br><strong>Keywords:</strong> real estate insurance, property insurance, homeowners insurance.
+                <br><strong>Best for:</strong> Insurance agents, brokers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 33. Real Estate Brokerage Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Brokerage Leads</a></td>
+            <td>531210</td>
+            <td>
+                Individuals and businesses looking to partner with real estate brokerage firms.
+                <br><strong>Keywords:</strong> real estate brokerage, property brokers, real estate agents.
+                <br><strong>Best for:</strong> Brokerage firms, real estate agents.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 34. Mixed-use Development Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Mixed-use Development Leads</a></td>
+            <td>531320</td>
+            <td>
+                Developers seeking opportunities to create properties with both residential and commercial uses.
+                <br><strong>Keywords:</strong> mixed-use development, multi-purpose properties, urban development.
+                <br><strong>Best for:</strong> Developers, urban planners.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 35. Real Estate Consulting Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Consulting Leads</a></td>
+            <td>541611</td>
+            <td>
+                Organizations seeking expert advice on real estate investments and strategies.
+                <br><strong>Keywords:</strong> real estate consulting, investment strategies, property advisory.
+                <br><strong>Best for:</strong> Real estate consultants, advisory firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 36. Real Estate Market Analysis Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Market Analysis Leads</a></td>
+            <td>541611</td>
+            <td>
+                Businesses and investors needing detailed market analysis for real estate decisions.
+                <br><strong>Keywords:</strong> market analysis, real estate trends, property market research.
+                <br><strong>Best for:</strong> Market analysts, research firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 37. Real Estate Software Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Software Leads</a></td>
+            <td>541512</td>
+            <td>
+                Companies offering software solutions for real estate management and transactions.
+                <br><strong>Keywords:</strong> real estate software, property management systems, CRM for real estate.
+                <br><strong>Best for:</strong> Software developers, tech firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 38. Property Tax Services Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Property Tax Services Leads</a></td>
+            <td>541211</td>
+            <td>
+                Property owners seeking assistance with property tax assessments and appeals.
+                <br><strong>Keywords:</strong> property tax services, tax assessment, tax appeals.
+                <br><strong>Best for:</strong> Tax consultants, appraisal firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 39. Real Estate CRM Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate CRM Leads</a></td>
+            <td>541512</td>
+            <td>
+                Real estate professionals seeking customer relationship management systems tailored to their needs.
+                <br><strong>Keywords:</strong> real estate CRM, customer management, CRM software.
+                <br><strong>Best for:</strong> CRM providers, real estate agents.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 40. Real Estate Virtual Tour Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Virtual Tour Leads</a></td>
+            <td>541512</td>
+            <td>
+                Sellers and agents looking to offer virtual tours of their properties.
+                <br><strong>Keywords:</strong> virtual tours, property walkthroughs, 3D tours.
+                <br><strong>Best for:</strong> Virtual tour providers, real estate photographers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 41. Real Estate Drone Services Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Drone Services Leads</a></td>
+            <td>541930</td>
+            <td>
+                Real estate professionals seeking aerial photography and videography services.
+                <br><strong>Keywords:</strong> drone services, aerial photography, real estate drones.
+                <br><strong>Best for:</strong> Drone operators, aerial imaging companies.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 42. Real Estate SEO Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate SEO Leads</a></td>
+            <td>541613</td>
+            <td>
+                Real estate businesses looking to improve their online visibility through SEO strategies.
+                <br><strong>Keywords:</strong> real estate SEO, search engine optimization, property SEO.
+                <br><strong>Best for:</strong> SEO specialists, digital marketing agencies.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 43. Real Estate Social Media Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Social Media Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Real estate professionals seeking to enhance their presence on social media platforms.
+                <br><strong>Keywords:</strong> social media marketing, real estate social media, online marketing.
+                <br><strong>Best for:</strong> Social media managers, digital marketers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 44. Real Estate Email Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Email Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Real estate businesses looking to implement effective email marketing campaigns.
+                <br><strong>Keywords:</strong> email marketing, real estate emails, email campaigns.
+                <br><strong>Best for:</strong> Email marketers, digital marketing agencies.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 45. Real Estate Content Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Content Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Real estate professionals seeking to develop and distribute valuable content to attract clients.
+                <br><strong>Keywords:</strong> content marketing, real estate content, property blogs.
+                <br><strong>Best for:</strong> Content creators, digital marketers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 46. Real Estate Video Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Video Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Real estate businesses looking to create and promote video content for listings and branding.
+                <br><strong>Keywords:</strong> video marketing, real estate videos, property videos.
+                <br><strong>Best for:</strong> Video producers, digital marketers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 47. Real Estate Influencer Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Influencer Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Brands seeking to collaborate with influencers to promote their real estate listings and services.
+                <br><strong>Keywords:</strong> influencer marketing, real estate influencers, brand ambassadors.
+                <br><strong>Best for:</strong> Marketing agencies, brand managers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 48. Real Estate Affiliate Marketing Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Affiliate Marketing Leads</a></td>
+            <td>541613</td>
+            <td>
+                Real estate businesses looking to establish or expand their affiliate marketing programs.
+                <br><strong>Keywords:</strong> affiliate marketing, real estate affiliates, partner marketing.
+                <br><strong>Best for:</strong> Affiliate managers, digital marketers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 49. Real Estate Market Expansion Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Market Expansion Leads</a></td>
+            <td>541614</td>
+            <td>
+                Businesses planning to enter new real estate markets and seeking strategic leads.
+                <br><strong>Keywords:</strong> market expansion, real estate growth, new markets.
+                <br><strong>Best for:</strong> Business development managers, strategic consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 50. Real Estate Franchise Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Real Estate Franchise Leads</a></td>
+            <td>531210</td>
+            <td>
+                Individuals and businesses interested in franchising real estate brokerage operations.
+                <br><strong>Keywords:</strong> real estate franchises, franchise opportunities, franchise expansion.
+                <br><strong>Best for:</strong> Franchise developers, real estate brokers.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 95. Data Security Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Data Security Leads</a></td>
+            <td>541512</td>
+            <td>
+                Organizations seeking data security and protection services.
+                <br><strong>Keywords:</strong> data security, cybersecurity, data protection.
+                <br><strong>Best for:</strong> Security firms, IT consultants.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 96. Sustainable Business Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Sustainable Business Leads</a></td>
+            <td>541614</td>
+            <td>
+                Businesses committed to sustainable and eco-friendly practices.
+                <br><strong>Keywords:</strong> sustainable business, eco-friendly, green practices.
+                <br><strong>Best for:</strong> Sustainable consultants, green technology firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 97. Corporate Training Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Corporate Training Leads</a></td>
+            <td>611430</td>
+            <td>
+                Companies seeking training programs for employee development and skills enhancement.
+                <br><strong>Keywords:</strong> corporate training, employee development, skills enhancement.
+                <br><strong>Best for:</strong> Training providers, HR departments.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 98. Retail Supply Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Retail Supply Leads</a></td>
+            <td>423810</td>
+            <td>
+                Suppliers providing goods and inventory to retail businesses.
+                <br><strong>Keywords:</strong> retail supply, inventory management, wholesale suppliers.
+                <br><strong>Best for:</strong> Retail suppliers, wholesale distributors.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+        
+          <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Cardiologists</a></td>
+            <td>621111</td>
+            <td>
+                Specialists focused on diagnosing and treating heart and cardiovascular system diseases.
+                <br><strong>Keywords:</strong> heart health, cardiovascular specialist, heart disease.
+                <br><strong>Best for:</strong> Heart specialists, cardiac care providers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 3. Dermatologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Dermatologists</a></td>
+            <td>621111</td>
+            <td>
+                Medical professionals specializing in the diagnosis and treatment of skin, hair, and nail conditions.
+                <br><strong>Keywords:</strong> skin care, dermatology, acne treatment.
+                <br><strong>Best for:</strong> Skin specialists, cosmetic dermatologists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 4. Dentists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Dentists</a></td>
+            <td>621210</td>
+            <td>
+                Professionals providing oral healthcare services, including tooth extraction, cleaning, and dental surgery.
+                <br><strong>Keywords:</strong> oral health, dental care, teeth cleaning.
+                <br><strong>Best for:</strong> General dentists, cosmetic dentists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 5. Orthodontists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Orthodontists</a></td>
+            <td>621210</td>
+            <td>
+                Dentists specialized in diagnosing and treating misaligned teeth and jaws using braces and other devices.
+                <br><strong>Keywords:</strong> braces, teeth alignment, orthodontic treatment.
+                <br><strong>Best for:</strong> Orthodontic specialists, dental aligners.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 6. Ophthalmologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Ophthalmologists</a></td>
+            <td>621111</td>
+            <td>
+                Medical doctors specializing in eye and vision care, including performing eye surgeries.
+                <br><strong>Keywords:</strong> eye care, vision health, eye surgery.
+                <br><strong>Best for:</strong> Eye specialists, vision correction providers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 7. Optometrists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Optometrists</a></td>
+            <td>621111</td>
+            <td>
+                Healthcare professionals providing vision care, including eye exams and prescribing corrective lenses.
+                <br><strong>Keywords:</strong> vision care, eye exams, glasses prescriptions.
+                <br><strong>Best for:</strong> Eye care specialists, opticians.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 8. Chiropractors -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Chiropractors</a></td>
+            <td>621310</td>
+            <td>
+                Health professionals focusing on diagnosing and treating neuromuscular disorders through manual adjustment of the spine.
+                <br><strong>Keywords:</strong> spinal adjustment, back pain relief, chiropractic care.
+                <br><strong>Best for:</strong> Chiropractic specialists, pain management providers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 9. Physical Therapists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Physical Therapists</a></td>
+            <td>621340</td>
+            <td>
+                Professionals helping patients recover mobility and manage pain through physical exercises and treatments.
+                <br><strong>Keywords:</strong> physical therapy, rehabilitation, mobility improvement.
+                <br><strong>Best for:</strong> Rehabilitation centers, sports therapists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 10. Occupational Therapists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Occupational Therapists</a></td>
+            <td>621340</td>
+            <td>
+                Therapists assisting patients in developing, recovering, and improving daily living and work skills.
+                <br><strong>Keywords:</strong> occupational therapy, daily living skills, rehabilitation.
+                <br><strong>Best for:</strong> Rehabilitation centers, therapy clinics.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 11. Speech Therapists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Speech Therapists</a></td>
+            <td>621340</td>
+            <td>
+                Specialists in diagnosing and treating communication and swallowing disorders.
+                <br><strong>Keywords:</strong> speech therapy, communication disorders, swallowing therapy.
+                <br><strong>Best for:</strong> Speech therapy clinics, rehabilitation centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 12. Audiologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Audiologists</a></td>
+            <td>621340</td>
+            <td>
+                Healthcare professionals specializing in diagnosing and treating hearing and balance disorders.
+                <br><strong>Keywords:</strong> hearing tests, balance disorders, audiology services.
+                <br><strong>Best for:</strong> Hearing clinics, balance disorder specialists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 13. Psychiatrists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Psychiatrists</a></td>
+            <td>621112</td>
+            <td>
+                Medical doctors specializing in diagnosing, treating, and preventing mental health disorders.
+                <br><strong>Keywords:</strong> mental health, psychiatric care, therapy.
+                <br><strong>Best for:</strong> Mental health clinics, psychiatric hospitals.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 14. Psychologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Psychologists</a></td>
+            <td>621111</td>
+            <td>
+                Professionals studying cognitive, emotional, and social processes and behavior by observing, interpreting, and recording how individuals relate to one another and their environments.
+                <br><strong>Keywords:</strong> psychological services, behavioral therapy, cognitive therapy.
+                <br><strong>Best for:</strong> Counseling centers, private practice psychologists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 15. Mental Health Counselors -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Mental Health Counselors</a></td>
+            <td>621112</td>
+            <td>
+                Counselors assisting individuals, families, and groups in managing mental health issues and emotional challenges.
+                <br><strong>Keywords:</strong> mental health counseling, emotional support, therapy sessions.
+                <br><strong>Best for:</strong> Counseling centers, private practice therapists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 16. Substance Abuse Counselors -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Substance Abuse Counselors</a></td>
+            <td>621112</td>
+            <td>
+                Specialists providing therapy and support to individuals struggling with addiction and substance abuse.
+                <br><strong>Keywords:</strong> addiction counseling, substance abuse therapy, rehabilitation.
+                <br><strong>Best for:</strong> Rehabilitation centers, addiction treatment facilities.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 17. Medical Laboratory Technicians -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Medical Laboratory Technicians</a></td>
+            <td>621511</td>
+            <td>
+                Professionals performing laboratory tests and analyses to assist in patient diagnosis and treatment.
+                <br><strong>Keywords:</strong> medical lab tests, laboratory analysis, diagnostic testing.
+                <br><strong>Best for:</strong> Medical laboratories, diagnostic centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 18. Diagnostic Imaging Specialists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Diagnostic Imaging Specialists</a></td>
+            <td>621512</td>
+            <td>
+                Experts in medical imaging techniques such as MRI, CT scans, and X-rays for diagnostic purposes.
+                <br><strong>Keywords:</strong> MRI scans, CT imaging, diagnostic radiology.
+                <br><strong>Best for:</strong> Imaging centers, radiology departments.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 19. Home Health Care Providers -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Home Health Care Providers</a></td>
+            <td>621610</td>
+            <td>
+                Services providing healthcare support and medical care to patients in their homes.
+                <br><strong>Keywords:</strong> home health care, in-home medical services, patient care at home.
+                <br><strong>Best for:</strong> Home health agencies, in-home care providers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 20. Hospitals -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Hospitals</a></td>
+            <td>622110</td>
+            <td>
+                Medical institutions providing comprehensive healthcare services, including emergency care and surgeries.
+                <br><strong>Keywords:</strong> hospital services, emergency care, surgical services.
+                <br><strong>Best for:</strong> Hospital administrators, healthcare providers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 21. Outpatient Care Centers -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Outpatient Care Centers</a></td>
+            <td>621493</td>
+            <td>
+                Facilities providing medical services without requiring an overnight stay, including diagnostics and minor procedures.
+                <br><strong>Keywords:</strong> outpatient services, diagnostic centers, ambulatory care.
+                <br><strong>Best for:</strong> Outpatient clinics, diagnostic facilities.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 22. Nursing Homes -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Nursing Homes</a></td>
+            <td>623312</td>
+            <td>
+                Long-term residential facilities providing nursing care for elderly or disabled individuals.
+                <br><strong>Keywords:</strong> nursing care, elderly care, long-term care facilities.
+                <br><strong>Best for:</strong> Nursing home administrators, elder care providers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 23. Pharmacies -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Pharmacies</a></td>
+            <td>446110</td>
+            <td>
+                Retail establishments dispensing prescription medications and offering pharmaceutical services.
+                <br><strong>Keywords:</strong> prescription medications, pharmaceutical services, drug dispensing.
+                <br><strong>Best for:</strong> Pharmacy owners, pharmaceutical suppliers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 24. Pharmacists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Pharmacists</a></td>
+            <td>621111</td>
+            <td>
+                Healthcare professionals dispensing medications and advising patients on their proper use.
+                <br><strong>Keywords:</strong> medication dispensing, pharmacy services, drug counseling.
+                <br><strong>Best for:</strong> Pharmacists, pharmacy managers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 25. Physician Assistants -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Physician Assistants</a></td>
+            <td>621111</td>
+            <td>
+                Medical professionals practicing medicine under the supervision of physicians, performing various clinical tasks.
+                <br><strong>Keywords:</strong> physician assistants, medical support, clinical tasks.
+                <br><strong>Best for:</strong> PA programs, medical clinics.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 26. Nurse Practitioners -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Nurse Practitioners</a></td>
+            <td>621111</td>
+            <td>
+                Advanced practice registered nurses providing primary and specialty healthcare services.
+                <br><strong>Keywords:</strong> nurse practitioners, advanced nursing, primary care.
+                <br><strong>Best for:</strong> NP clinics, healthcare providers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 27. Podiatrists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Podiatrists</a></td>
+            <td>621111</td>
+            <td>
+                Specialists in diagnosing and treating conditions of the foot, ankle, and related structures of the leg.
+                <br><strong>Keywords:</strong> foot care, podiatry, ankle treatment.
+                <br><strong>Best for:</strong> Podiatry clinics, foot care specialists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 28. Endocrinologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Endocrinologists</a></td>
+            <td>621111</td>
+            <td>
+                Physicians specializing in the endocrine system and hormone-related disorders.
+                <br><strong>Keywords:</strong> hormone therapy, diabetes management, thyroid disorders.
+                <br><strong>Best for:</strong> Endocrine clinics, hormone specialists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 29. Gastroenterologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Gastroenterologists</a></td>
+            <td>621111</td>
+            <td>
+                Specialists in diagnosing and treating digestive system disorders.
+                <br><strong>Keywords:</strong> digestive health, gastrointestinal disorders, endoscopy.
+                <br><strong>Best for:</strong> GI clinics, digestive health centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 30. Neurologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Neurologists</a></td>
+            <td>621111</td>
+            <td>
+                Medical doctors specializing in diagnosing and treating disorders of the nervous system.
+                <br><strong>Keywords:</strong> neurological disorders, brain health, nerve treatment.
+                <br><strong>Best for:</strong> Neurology clinics, brain health centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 31. Oncologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Oncologists</a></td>
+            <td>621111</td>
+            <td>
+                Physicians specializing in the diagnosis and treatment of cancer.
+                <br><strong>Keywords:</strong> cancer treatment, oncology, chemotherapy.
+                <br><strong>Best for:</strong> Cancer centers, oncology clinics.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 32. Radiologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Radiologists</a></td>
+            <td>621512</td>
+            <td>
+                Medical doctors specializing in diagnosing and treating diseases using medical imaging techniques.
+                <br><strong>Keywords:</strong> medical imaging, radiology, MRI scans.
+                <br><strong>Best for:</strong> Radiology departments, imaging centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 33. Anesthesiologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Anesthesiologists</a></td>
+            <td>621111</td>
+            <td>
+                Physicians responsible for administering anesthesia and managing pain during surgical procedures.
+                <br><strong>Keywords:</strong> anesthesia administration, pain management, surgical support.
+                <br><strong>Best for:</strong> Surgical centers, hospitals.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 34. Surgeons -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Surgeons</a></td>
+            <td>621111</td>
+            <td>
+                Medical doctors specializing in performing surgeries to treat injuries, diseases, and deformities.
+                <br><strong>Keywords:</strong> surgical procedures, operative care, surgery specialists.
+                <br><strong>Best for:</strong> Surgical centers, hospitals.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 35. Urologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Urologists</a></td>
+            <td>621111</td>
+            <td>
+                Specialists in diagnosing and treating urinary tract disorders and male reproductive health issues.
+                <br><strong>Keywords:</strong> urinary health, urology, kidney treatment.
+                <br><strong>Best for:</strong> Urology clinics, kidney specialists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 36. Rheumatologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Rheumatologists</a></td>
+            <td>621111</td>
+            <td>
+                Specialists in diagnosing and treating rheumatic diseases and musculoskeletal conditions.
+                <br><strong>Keywords:</strong> rheumatic diseases, arthritis treatment, joint care.
+                <br><strong>Best for:</strong> Rheumatology clinics, arthritis specialists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 37. Hematologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Hematologists</a></td>
+            <td>621111</td>
+            <td>
+                Medical professionals specializing in blood-related diseases and disorders.
+                <br><strong>Keywords:</strong> blood disorders, hematology, anemia treatment.
+                <br><strong>Best for:</strong> Hematology clinics, blood disorder specialists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 38. Pulmonologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Pulmonologists</a></td>
+            <td>621111</td>
+            <td>
+                Specialists in diagnosing and treating respiratory system disorders.
+                <br><strong>Keywords:</strong> respiratory health, pulmonology, lung disease treatment.
+                <br><strong>Best for:</strong> Pulmonary clinics, respiratory therapists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 39. Nephrologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Nephrologists</a></td>
+            <td>621111</td>
+            <td>
+                Doctors specializing in kidney care and treating kidney-related diseases.
+                <br><strong>Keywords:</strong> kidney health, nephrology, dialysis treatment.
+                <br><strong>Best for:</strong> Kidney clinics, dialysis centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 40. Pathologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Pathologists</a></td>
+            <td>621511</td>
+            <td>
+                Medical doctors who diagnose diseases by examining tissues, organs, and bodily fluids.
+                <br><strong>Keywords:</strong> disease diagnosis, pathology, laboratory analysis.
+                <br><strong>Best for:</strong> Pathology labs, diagnostic centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 41. Pediatrics Specialists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Pediatrics Specialists</a></td>
+            <td>621111</td>
+            <td>
+                Doctors specializing in the medical care of infants, children, and adolescents.
+                <br><strong>Keywords:</strong> child healthcare, pediatric medicine, adolescent health.
+                <br><strong>Best for:</strong> Pediatric clinics, child health centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 42. Geriatric Care Providers -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Geriatric Care Providers</a></td>
+            <td>621999</td>
+            <td>
+                Professionals specializing in the healthcare needs of elderly patients, focusing on physical and mental health.
+                <br><strong>Keywords:</strong> elderly care, geriatric medicine, senior health services.
+                <br><strong>Best for:</strong> Geriatric clinics, senior living facilities.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 43. Allergy and Immunology Specialists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Allergy and Immunology Specialists</a></td>
+            <td>621111</td>
+            <td>
+                Doctors diagnosing and treating allergic reactions and immune system disorders.
+                <br><strong>Keywords:</strong> allergy treatment, immunology, immune disorders.
+                <br><strong>Best for:</strong> Allergy clinics, immunology labs.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 44. Sports Medicine Specialists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Sports Medicine Specialists</a></td>
+            <td>621111</td>
+            <td>
+                Professionals focusing on physical fitness and the treatment and prevention of injuries related to sports and exercise.
+                <br><strong>Keywords:</strong> sports injuries, physical fitness, athletic therapy.
+                <br><strong>Best for:</strong> Sports clinics, athletic trainers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 45. Emergency Medical Services Providers -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Emergency Medical Services Providers</a></td>
+            <td>621999</td>
+            <td>
+                Services providing urgent medical care and transportation for acute illnesses and injuries.
+                <br><strong>Keywords:</strong> emergency care, ambulance services, urgent medical response.
+                <br><strong>Best for:</strong> EMS providers, emergency clinics.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 46. Hospice Care Providers -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Hospice Care Providers</a></td>
+            <td>621610</td>
+            <td>
+                Services offering compassionate care and support to terminally ill patients and their families.
+                <br><strong>Keywords:</strong> hospice care, end-of-life services, palliative care.
+                <br><strong>Best for:</strong> Hospice facilities, palliative care providers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 47. Integrative Medicine Practitioners -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Integrative Medicine Practitioners</a></td>
+            <td>621111</td>
+            <td>
+                Healthcare providers combining conventional medicine with alternative therapies for holistic patient care.
+                <br><strong>Keywords:</strong> integrative medicine, holistic health, alternative therapies.
+                <br><strong>Best for:</strong> Integrative clinics, holistic health centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+        
+        <!-- 2. Certified Public Accountants (CPAs) -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Certified Public Accountants (CPAs)</a></td>
+            <td>541211</td>
+            <td>
+                Accounting professionals providing auditing, tax, and consulting services.
+                <br><strong>Keywords:</strong> accounting services, tax preparation, financial auditing.
+                <br><strong>Best for:</strong> Accounting firms, financial consultants.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 3. Architects -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Architects</a></td>
+            <td>541310</td>
+            <td>
+                Professionals designing buildings and structures, ensuring functionality and aesthetics.
+                <br><strong>Keywords:</strong> architectural design, building plans, structural engineering.
+                <br><strong>Best for:</strong> Architectural firms, independent architects.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 4. Engineers -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Engineers</a></td>
+            <td>541330</td>
+            <td>
+                Licensed professionals in various engineering disciplines designing and overseeing projects.
+                <br><strong>Keywords:</strong> engineering services, project design, structural engineering.
+                <br><strong>Best for:</strong> Engineering firms, independent engineers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 5. Real Estate Brokers -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Real Estate Brokers</a></td>
+            <td>531210</td>
+            <td>
+                Licensed professionals facilitating real estate transactions between buyers and sellers.
+                <br><strong>Keywords:</strong> real estate transactions, property sales, real estate agents.
+                <br><strong>Best for:</strong> Brokerage firms, independent brokers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 6. Insurance Agents -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Insurance Agents</a></td>
+            <td>524210</td>
+            <td>
+                Licensed professionals selling and managing insurance policies for individuals and businesses.
+                <br><strong>Keywords:</strong> insurance policies, risk management, insurance sales.
+                <br><strong>Best for:</strong> Insurance agencies, independent agents.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 7. Licensed Therapists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Therapists</a></td>
+            <td>621420</td>
+            <td>
+                Mental health professionals providing counseling and therapy services to individuals and groups.
+                <br><strong>Keywords:</strong> mental health counseling, therapy services, psychological support.
+                <br><strong>Best for:</strong> Counseling centers, private practice therapists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 8. Licensed Electricians -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Electricians</a></td>
+            <td>238210</td>
+            <td>
+                Professionals specializing in electrical wiring, installations, and maintenance for residential and commercial properties.
+                <br><strong>Keywords:</strong> electrical installations, wiring services, electrical maintenance.
+                <br><strong>Best for:</strong> Electrical contractors, maintenance companies.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 9. Licensed Plumbers -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Plumbers</a></td>
+            <td>238220</td>
+            <td>
+                Experts in installing and repairing plumbing systems, including pipes, fixtures, and water supply.
+                <br><strong>Keywords:</strong> plumbing services, pipe repair, fixture installation.
+                <br><strong>Best for:</strong> Plumbing contractors, maintenance services.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 10. Licensed HVAC Technicians -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed HVAC Technicians</a></td>
+            <td>238220</td>
+            <td>
+                Professionals installing, maintaining, and repairing heating, ventilation, and air conditioning systems.
+                <br><strong>Keywords:</strong> HVAC services, air conditioning repair, heating system installation.
+                <br><strong>Best for:</strong> HVAC contractors, maintenance services.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 11. Licensed General Contractors -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed General Contractors</a></td>
+            <td>236115</td>
+            <td>
+                Professionals overseeing construction projects, managing subcontractors, and ensuring project completion.
+                <br><strong>Keywords:</strong> construction management, project oversight, building contractor.
+                <br><strong>Best for:</strong> Construction firms, building contractors.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 12. Licensed Building Inspectors -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Building Inspectors</a></td>
+            <td>541350</td>
+            <td>
+                Professionals assessing building codes, structural integrity, and safety compliance during construction or renovation.
+                <br><strong>Keywords:</strong> building inspections, code compliance, structural assessment.
+                <br><strong>Best for:</strong> Inspection services, construction firms.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 13. Licensed Surveyors -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Surveyors</a></td>
+            <td>541370</td>
+            <td>
+                Experts in measuring land boundaries, property dimensions, and preparing maps for construction and legal purposes.
+                <br><strong>Keywords:</strong> land surveying, boundary measurement, property mapping.
+                <br><strong>Best for:</strong> Surveying firms, construction companies.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 14. Licensed Interior Designers -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Interior Designers</a></td>
+            <td>541410</td>
+            <td>
+                Professionals planning and designing interior spaces to enhance functionality and aesthetics.
+                <br><strong>Keywords:</strong> interior design, space planning, home decoration.
+                <br><strong>Best for:</strong> Design firms, independent interior designers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 15. Licensed Landscape Architects -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Landscape Architects</a></td>
+            <td>541310</td>
+            <td>
+                Experts in designing outdoor spaces, including gardens, parks, and recreational areas.
+                <br><strong>Keywords:</strong> landscape design, outdoor spaces, garden planning.
+                <br><strong>Best for:</strong> Landscaping firms, urban planners.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 16. Licensed Social Workers -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Social Workers</a></td>
+            <td>621420</td>
+            <td>
+                Professionals assisting individuals and communities in managing and overcoming social and personal challenges.
+                <br><strong>Keywords:</strong> social services, community support, counseling.
+                <br><strong>Best for:</strong> Social work agencies, community organizations.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 17. Licensed Opticians -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Opticians</a></td>
+            <td>446120</td>
+            <td>
+                Professionals fitting and dispensing eyeglasses and contact lenses based on prescriptions from optometrists or ophthalmologists.
+                <br><strong>Keywords:</strong> eyeglass fitting, contact lenses, optical services.
+                <br><strong>Best for:</strong> Optical shops, eye care centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 18. Licensed Massage Therapists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Massage Therapists</a></td>
+            <td>621399</td>
+            <td>
+                Professionals providing therapeutic massage services to promote relaxation and alleviate muscle tension.
+                <br><strong>Keywords:</strong> therapeutic massage, relaxation services, muscle therapy.
+                <br><strong>Best for:</strong> Massage clinics, wellness centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 19. Licensed Acupuncturists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Acupuncturists</a></td>
+            <td>621399</td>
+            <td>
+                Practitioners using acupuncture techniques to treat various health conditions and promote overall wellness.
+                <br><strong>Keywords:</strong> acupuncture therapy, traditional Chinese medicine, pain relief.
+                <br><strong>Best for:</strong> Wellness clinics, alternative medicine centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 20. Licensed Chiropractors -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Chiropractors</a></td>
+            <td>621310</td>
+            <td>
+                Healthcare professionals focusing on diagnosing and treating neuromuscular disorders through spinal adjustments.
+                <br><strong>Keywords:</strong> chiropractic care, spinal adjustments, pain management.
+                <br><strong>Best for:</strong> Chiropractic clinics, wellness centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 21. Licensed Optometrists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Optometrists</a></td>
+            <td>621111</td>
+            <td>
+                Eye care professionals conducting eye exams, prescribing corrective lenses, and diagnosing eye conditions.
+                <br><strong>Keywords:</strong> eye exams, vision correction, optometry services.
+                <br><strong>Best for:</strong> Optometry clinics, eye care centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 22. Licensed Counselors -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Counselors</a></td>
+            <td>621420</td>
+            <td>
+                Mental health professionals providing guidance and support to individuals facing personal challenges.
+                <br><strong>Keywords:</strong> counseling services, mental health support, therapy sessions.
+                <br><strong>Best for:</strong> Counseling centers, private practice counselors.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 23. Licensed Dietitians -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Dietitians</a></td>
+            <td>621399</td>
+            <td>
+                Nutrition experts providing dietary planning and nutritional counseling to promote health and manage diseases.
+                <br><strong>Keywords:</strong> nutrition counseling, dietary planning, healthy eating.
+                <br><strong>Best for:</strong> Nutrition clinics, wellness centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 24. Licensed Physical Therapists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Physical Therapists</a></td>
+            <td>621340</td>
+            <td>
+                Healthcare professionals assisting patients in recovering mobility and managing pain through physical exercises.
+                <br><strong>Keywords:</strong> physical therapy, rehabilitation, mobility improvement.
+                <br><strong>Best for:</strong> Physical therapy clinics, rehabilitation centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 25. Licensed Acupuncturists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Acupuncturists</a></td>
+            <td>621399</td>
+            <td>
+                Practitioners using acupuncture techniques to treat various health conditions and promote overall wellness.
+                <br><strong>Keywords:</strong> acupuncture therapy, traditional Chinese medicine, pain relief.
+                <br><strong>Best for:</strong> Wellness clinics, alternative medicine centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 26. Licensed Barbers -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Barbers</a></td>
+            <td>812112</td>
+            <td>
+                Professionals providing hair cutting, styling, and grooming services to clients.
+                <br><strong>Keywords:</strong> barber services, hair cutting, grooming.
+                <br><strong>Best for:</strong> Barbershops, grooming salons.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 27. Licensed Cosmetologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Cosmetologists</a></td>
+            <td>812112</td>
+            <td>
+                Professionals providing beauty services, including hairstyling, skincare, and nail care.
+                <br><strong>Keywords:</strong> beauty services, hairstyling, skincare treatments.
+                <br><strong>Best for:</strong> Salons, beauty spas.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 28. Licensed Massage Therapists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Massage Therapists</a></td>
+            <td>621399</td>
+            <td>
+                Professionals providing therapeutic massage services to promote relaxation and alleviate muscle tension.
+                <br><strong>Keywords:</strong> therapeutic massage, relaxation services, muscle therapy.
+                <br><strong>Best for:</strong> Massage clinics, wellness centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 29. Licensed Estheticians -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Estheticians</a></td>
+            <td>812112</td>
+            <td>
+                Skin care specialists offering treatments such as facials, exfoliation, and hair removal.
+                <br><strong>Keywords:</strong> skin care, facials, hair removal.
+                <br><strong>Best for:</strong> Spas, beauty salons.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 30. Licensed Dental Hygienists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Dental Hygienists</a></td>
+            <td>621210</td>
+            <td>
+                Professionals performing dental cleanings, examinations, and preventive care under the supervision of dentists.
+                <br><strong>Keywords:</strong> dental cleanings, preventive dental care, oral hygiene.
+                <br><strong>Best for:</strong> Dental clinics, orthodontic offices.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 31. Licensed Veterinary Technicians -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Veterinary Technicians</a></td>
+            <td>621910</td>
+            <td>
+                Veterinary professionals assisting veterinarians in animal care, including medical procedures and diagnostics.
+                <br><strong>Keywords:</strong> animal care, veterinary assistance, pet health services.
+                <br><strong>Best for:</strong> Veterinary clinics, animal hospitals.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 32. Licensed Physical Therapists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Physical Therapists</a></td>
+            <td>621340</td>
+            <td>
+                Healthcare professionals assisting patients in recovering mobility and managing pain through physical exercises.
+                <br><strong>Keywords:</strong> physical therapy, rehabilitation, mobility improvement.
+                <br><strong>Best for:</strong> Physical therapy clinics, rehabilitation centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 33. Licensed Massage Therapists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Massage Therapists</a></td>
+            <td>621399</td>
+            <td>
+                Professionals providing therapeutic massage services to promote relaxation and alleviate muscle tension.
+                <br><strong>Keywords:</strong> therapeutic massage, relaxation services, muscle therapy.
+                <br><strong>Best for:</strong> Massage clinics, wellness centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 34. Licensed Speech Therapists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Speech Therapists</a></td>
+            <td>621340</td>
+            <td>
+                Specialists in diagnosing and treating communication and swallowing disorders.
+                <br><strong>Keywords:</strong> speech therapy, communication disorders, swallowing therapy.
+                <br><strong>Best for:</strong> Speech therapy clinics, rehabilitation centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 35. Licensed Medical Assistants -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Medical Assistants</a></td>
+            <td>621111</td>
+            <td>
+                Support healthcare professionals by performing administrative and clinical tasks in medical settings.
+                <br><strong>Keywords:</strong> medical assistance, clinical support, administrative healthcare tasks.
+                <br><strong>Best for:</strong> Medical offices, clinics.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 36. Licensed Respiratory Therapists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Respiratory Therapists</a></td>
+            <td>621340</td>
+            <td>
+                Healthcare professionals specializing in the assessment and treatment of breathing and cardiopulmonary disorders.
+                <br><strong>Keywords:</strong> respiratory care, breathing disorders, pulmonary therapy.
+                <br><strong>Best for:</strong> Respiratory clinics, hospitals.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 37. Licensed Occupational Therapists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Occupational Therapists</a></td>
+            <td>621340</td>
+            <td>
+                Therapists helping individuals develop, recover, and improve the skills needed for daily living and working.
+                <br><strong>Keywords:</strong> occupational therapy, daily living skills, rehabilitation.
+                <br><strong>Best for:</strong> Rehabilitation centers, occupational therapy clinics.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 38. Licensed Dietitians -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Dietitians</a></td>
+            <td>621399</td>
+            <td>
+                Nutrition experts providing dietary planning and nutritional counseling to promote health and manage diseases.
+                <br><strong>Keywords:</strong> nutrition counseling, dietary planning, healthy eating.
+                <br><strong>Best for:</strong> Nutrition clinics, wellness centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 39. Licensed Veterinary Technicians -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Veterinary Technicians</a></td>
+            <td>621910</td>
+            <td>
+                Veterinary professionals assisting veterinarians in animal care, including medical procedures and diagnostics.
+                <br><strong>Keywords:</strong> animal care, veterinary assistance, pet health services.
+                <br><strong>Best for:</strong> Veterinary clinics, animal hospitals.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 40. Licensed Opticians -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Opticians</a></td>
+            <td>446120</td>
+            <td>
+                Professionals fitting and dispensing eyeglasses and contact lenses based on prescriptions from optometrists or ophthalmologists.
+                <br><strong>Keywords:</strong> eyeglass fitting, contact lenses, optical services.
+                <br><strong>Best for:</strong> Optical shops, eye care centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 41. Licensed Financial Advisors -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Financial Advisors</a></td>
+            <td>523930</td>
+            <td>
+                Professionals providing financial planning, investment advice, and wealth management services.
+                <br><strong>Keywords:</strong> financial planning, investment advice, wealth management.
+                <br><strong>Best for:</strong> Financial advisory firms, independent advisors.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 42. Licensed Insurance Adjusters -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Insurance Adjusters</a></td>
+            <td>524298</td>
+            <td>
+                Professionals evaluating insurance claims to determine the extent of the insuring company's liability.
+                <br><strong>Keywords:</strong> insurance claims, claim evaluation, liability assessment.
+                <br><strong>Best for:</strong> Insurance companies, independent adjusters.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 43. Licensed Appraisers -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Appraisers</a></td>
+            <td>531320</td>
+            <td>
+                Professionals determining the value of real estate, personal property, and other assets.
+                <br><strong>Keywords:</strong> property appraisal, asset valuation, real estate appraisal.
+                <br><strong>Best for:</strong> Appraisal firms, real estate agencies.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 44. Licensed Health Coaches -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Health Coaches</a></td>
+            <td>621340</td>
+            <td>
+                Professionals assisting clients in achieving health and wellness goals through personalized coaching.
+                <br><strong>Keywords:</strong> health coaching, wellness goals, personalized health plans.
+                <br><strong>Best for:</strong> Wellness centers, private health coaches.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 45. Licensed Speech Pathologists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Speech Pathologists</a></td>
+            <td>621340</td>
+            <td>
+                Specialists in diagnosing and treating communication and swallowing disorders.
+                <br><strong>Keywords:</strong> speech pathology, communication disorders, swallowing therapy.
+                <br><strong>Best for:</strong> Speech therapy clinics, rehabilitation centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 46. Licensed Acupuncturists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Acupuncturists</a></td>
+            <td>621399</td>
+            <td>
+                Practitioners using acupuncture techniques to treat various health conditions and promote overall wellness.
+                <br><strong>Keywords:</strong> acupuncture therapy, traditional Chinese medicine, pain relief.
+                <br><strong>Best for:</strong> Wellness clinics, alternative medicine centers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 47. Licensed Pest Control Professionals -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Pest Control Professionals</a></td>
+            <td>561710</td>
+            <td>
+                Experts in controlling and eliminating pests from residential and commercial properties.
+                <br><strong>Keywords:</strong> pest control, extermination services, pest management.
+                <br><strong>Best for:</strong> Pest control companies, exterminators.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 48. Licensed Interior Designers -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Interior Designers</a></td>
+            <td>541410</td>
+            <td>
+                Professionals planning and designing interior spaces to enhance functionality and aesthetics.
+                <br><strong>Keywords:</strong> interior design, space planning, home decoration.
+                <br><strong>Best for:</strong> Design firms, independent interior designers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 49. Licensed Funeral Directors -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Funeral Directors</a></td>
+            <td>812211</td>
+            <td>
+                Professionals managing funeral arrangements, including embalming, casket selection, and service coordination.
+                <br><strong>Keywords:</strong> funeral services, embalming, memorial services.
+                <br><strong>Best for:</strong> Funeral homes, memorial service providers.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+        <!-- 50. Licensed Tattoo Artists -->
+        <tr>
+            <td><a href="https://www.avocadata.com" target="_blank">Licensed Tattoo Artists</a></td>
+            <td>812199</td>
+            <td>
+                Artists creating permanent body art through tattooing techniques.
+                <br><strong>Keywords:</strong> tattoo services, body art, permanent tattoos.
+                <br><strong>Best for:</strong> Tattoo studios, freelance tattoo artists.
+            </td>
+            <td>
+                <a href="https://www.avocadata.com" target="_blank">Checkout Avocadata</a><br>
+                <a href="https://www.datatoleads.com" target="_blank">Checkout DataToLeads</a>
+            </td>
+        </tr>
+
+
+        <!-- 99. Sustainability Consulting Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Sustainability Consulting Leads</a></td>
+            <td>541618</td>
+            <td>
+                Organizations seeking sustainability strategies and environmental consulting services.
+                <br><strong>Keywords:</strong> sustainability consulting, environmental strategies, green initiatives.
+                <br><strong>Best for:</strong> Sustainability consultants, environmental advisors.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+        <!-- 100. Energy Efficiency Leads -->
+        <tr>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Energy Efficiency Leads</a></td>
+            <td>541620</td>
+            <td>
+                Businesses and individuals seeking energy efficiency solutions to reduce costs and environmental impact.
+                <br><strong>Keywords:</strong> energy efficiency, cost reduction, sustainable energy.
+                <br><strong>Best for:</strong> Energy consultants, sustainability firms.
+            </td>
+            <td><a href="https://app.avocadata.com/pricing.php" target="_blank">Checkout</a></td>
+        </tr>
+
+    </table>
+
+    <!-- No Results Message -->
+    <p id="noResults">No results found.</p>
+
+    <!-- Checkout Button -->
+    <button id="checkoutButton" style="display:none;">Checkout Leads</button>
+
+    <!-- JavaScript Code -->
+    <script>
+        let selectedLeadType = '';
+
+        function searchLeads() {
+            const inputElement = document.getElementById('leadType');
+            const input = inputElement.value.trim().toLowerCase();
+            const table = document.getElementById('leadTable');
+            const noResults = document.getElementById('noResults');
+            const rows = table.querySelectorAll('tr:not(:first-child)');
+            let matchCount = 0;
+            let hasMatches = false;
+
+            rows.forEach(row => {
+                const rowText = row.textContent.toLowerCase();
+                if (rowText.includes(input) && input !== '') {
+                    if (matchCount < 100) { // Display up to 100 matches
+                        row.style.display = '';
+                        matchCount++;
+                        hasMatches = true;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                } else if (input === '') {
+                    row.style.display = 'none';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            if (hasMatches && input !== '') {
+                table.style.display = 'table';
+                noResults.style.display = 'none';
+            } else if (input !== '') {
+                table.style.display = 'none';
+                noResults.style.display = 'block';
+            } else {
+                table.style.display = 'none';
+                noResults.style.display = 'none';
+            }
+        }
+
+        // Add click event to table rows
+        document.addEventListener('DOMContentLoaded', () => {
+            const table = document.getElementById('leadTable');
+            const tableRows = table.querySelectorAll('tr:not(:first-child)');
+            tableRows.forEach(row => {
+                row.addEventListener('click', function() {
+                    // Remove highlight from other rows
+                    document.querySelectorAll('.selected-row').forEach(r => r.classList.remove('selected-row'));
+                    // Add highlight to selected row
+                    this.classList.add('selected-row');
+                    // Update selected lead type (assuming it's in the first cell)
+                    selectedLeadType = this.cells[0].textContent.trim();
+                    // Update button text and display it
+                    const button = document.getElementById('checkoutButton');
+                    button.textContent = 'Checkout ' + selectedLeadType;
+                    button.style.display = 'inline-block';
+                    // Optionally, update the button's link or data attributes here
+                });
+            });
+        });
+    </script>
+</body>
+</html>
